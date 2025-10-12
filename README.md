@@ -1,28 +1,81 @@
-I've created a comprehensive **README.md** for your AI-Ready Documentation Scraper project . Here's what's included:
+# AI-Ready Documentation Scraper
 
-## README Sections
+## Project Overview
 
-**Project overview** - Clear description of purpose and target audience (AI developers, automation specialists) with emphasis on building multi-agent systems without vector databases .
+This project is an AI-Ready Documentation Scraper. Its primary purpose is to crawl and scrape documentation websites, process the content into a structured format, and enrich it with metadata to make it suitable for consumption by AI agents, such as those in multi-agent systems.
 
-**Key features** - Highlights all major capabilities including intelligent categorization, metadata generation, AI-optimized structure, and domain-agnostic design .
+The core of the project is a sophisticated bash script, `scrape_and_organize.sh`, which orchestrates the entire process. It uses the Firecrawl API to perform the web scraping and then applies a series of processing and organization steps to the scraped content.
 
-**Prerequisites & installation** - Complete setup instructions for Firecrawl, dependencies (bash, curl, jq), and environment configuration .
+The main technologies used are:
+*   **Bash:** For the main scripting and orchestration.
+*   **Firecrawl:** For web scraping.
+*   **curl:** For making API requests to Firecrawl.
+*   **jq:** For parsing JSON responses from the API.
+*   **Docker:** For containerizing the application and its dependencies.
 
-**Usage examples** - Practical examples for scraping n8n, Stripe, and other documentation sites with parameter explanations .
+## Features
 
-**Output structure** - Visual representation of the organized directory tree showing raw, processed, and categorized folders .
+*   **Intelligent Categorization:** Automatically categorizes scraped documents based on URL patterns.
+*   **Metadata Generation:** Enriches documents with metadata such as title, source URL, category, and tags.
+*   **AI-Optimized Structure:** Organizes content in a way that is easy for AI agents to parse and understand.
+*   **Modular and Configurable:** The script is broken down into functions and uses a separate configuration file for easy customization.
+*   **Containerized:** A Dockerfile is included for easy deployment and portability.
 
-**AI agent integration** - Detailed workflows for using the scraped documentation with general AI agents, sub-agents, MCP servers, LangChain, and n8n workflows .
+## Getting Started
 
-**Configuration & customization** - Instructions for modifying categorization patterns, metadata fields, and adding custom post-processing .
+### Prerequisites
 
-**Troubleshooting** - Common issues and solutions including connectivity problems, missing dependencies, and categorization fixes .
+*   **bash:** The script is designed to be run in a bash environment.
+*   **curl:** Used for making API calls.
+*   **jq:** Used for parsing JSON.
+*   **Docker:** (Optional) For running the scraper in a container.
+*   **Firecrawl API:** A running instance of the Firecrawl API is required.
 
-**Advanced usage** - Header-based splitting, custom processing, scheduled updates via cron, and performance benchmarks .
+### Installation
 
-**Security & best practices** - API key management, rate limiting, data privacy considerations, and recommended workflows .
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/RohiRIK/doc-crawler-ai-organizer.git
+    cd doc-crawler-ai-organizer
+    ```
 
-The README is **production-ready** and follows enterprise documentation standards with clear sections, code examples, tables, and actionable instructions tailored to your AI development and automation expertise .
+2.  Configure the script:
+    *   Copy the example configuration file:
+        ```bash
+        cp scripts/config.sh.example scripts/config.sh
+        ```
+    *   Edit `scripts/config.sh` and set your `FIRECRAWL_API_KEY` and, if necessary, the `FIRECRAWL_API_URL`.
 
-Sources
+### Running the Scraper
 
+There are two ways to run the scraper:
+
+**1. Directly with Bash:**
+
+```bash
+./scripts/scrape_and_organize.sh <domain_url> [max_pages] [output_dir]
+```
+
+*   `<domain_url>`: **(Required)** The URL of the documentation website to scrape (e.g., `https://docs.n8n.io`).
+*   `[max_pages]`: (Optional) The maximum number of pages to crawl. Defaults to `1000`.
+*   `[output_dir]`: (Optional) The directory to save the output files. Defaults to `./docs_output`.
+
+**2. Using Docker:**
+
+*   Build the Docker image:
+    ```bash
+    docker build -t doc-scraper .
+    ```
+
+*   Run the scraper in a container:
+    ```bash
+    docker run -v $(pwd)/docs_output:/app/docs_output doc-scraper <domain_url> [max_pages]
+    ```
+    *   The `-v $(pwd)/docs_output:/app/docs_output` flag mounts the output directory on your host machine so you can access the scraped files.
+
+## Development Conventions
+
+*   **Shell Scripting:** The project follows standard shell scripting practices.
+*   **Modularity:** The main script `scrape_and_organize.sh` sources helper functions from `scripts/functions.sh` and configuration from `scripts/config.sh`.
+*   **Error Handling:** The script uses `set -e` to exit immediately if a command fails. It also includes dependency checks and error handling for API calls.
+*   **Logging:** The script includes logging functions (`log_info`, `log_success`, `log_warning`, `log_error`) to provide clear output during execution.

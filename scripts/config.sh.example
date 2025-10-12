@@ -1,0 +1,7 @@
+# Configuration for scrape_and_organize.sh
+
+# The URL of the Firecrawl API
+FIRECRAWL_API_URL="http://localhost:3002"
+
+# Your Firecrawl API key
+FIRECRAWL_API_KEY="your-api-key"
