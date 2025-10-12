@@ -69,9 +69,10 @@ There are two ways to run the scraper:
 
 *   Run the scraper in a container:
     ```bash
-    docker run -v $(pwd)/ai_knowledge_base:/app/ai_knowledge_base doc-scraper <domain_url> [max_pages]
+    docker run -v /path/to/your/output/folder:/app/ai_knowledge_base doc-scraper <domain_url> [max_pages]
     ```
-    *   The `-v $(pwd)/ai_knowledge_base:/app/ai_knowledge_base` flag mounts the output directory on your host machine so you can access the scraped files.
+    *   Replace `/path/to/your/output/folder` with the **absolute path** to the folder where you want to save the `ai_knowledge_base`.
+    *   The `-v` flag mounts the output directory on your host machine so you can access the scraped files.
 
 ## Development Conventions
 
