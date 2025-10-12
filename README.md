@@ -58,7 +58,7 @@ There are two ways to run the scraper:
 
 *   `<domain_url>`: **(Required)** The URL of the documentation website to scrape (e.g., `https://docs.n8n.io`).
 *   `[max_pages]`: (Optional) The maximum number of pages to crawl. Defaults to `1000`.
-*   `[output_dir]`: (Optional) The directory to save the output files. Defaults to `./docs_output`.
+*   `[output_dir]`: (Optional) The directory to save the output files. Defaults to `./ai_knowledge_base`.
 
 **2. Using Docker:**
 
@@ -69,9 +69,9 @@ There are two ways to run the scraper:
 
 *   Run the scraper in a container:
     ```bash
-    docker run -v $(pwd)/docs_output:/app/docs_output doc-scraper <domain_url> [max_pages]
+    docker run -v $(pwd)/ai_knowledge_base:/app/ai_knowledge_base doc-scraper <domain_url> [max_pages]
     ```
-    *   The `-v $(pwd)/docs_output:/app/docs_output` flag mounts the output directory on your host machine so you can access the scraped files.
+    *   The `-v $(pwd)/ai_knowledge_base:/app/ai_knowledge_base` flag mounts the output directory on your host machine so you can access the scraped files.
 
 ## Development Conventions
 

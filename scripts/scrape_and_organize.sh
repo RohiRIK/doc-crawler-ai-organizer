@@ -27,7 +27,7 @@ source "$(dirname "$0")/config.sh"
 
 DOMAIN_URL="${1:-https://docs.n8n.io}"
 MAX_PAGES="${2:-1000}"
-BASE_OUTPUT_DIR="${3:-./docs_output}"
+BASE_OUTPUT_DIR="${3:-./ai_knowledge_base}"
 POLL_INTERVAL=5
 
 # Derived paths
